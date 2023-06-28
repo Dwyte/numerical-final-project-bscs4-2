@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="/decimalToIEEE754">Decimal to IEEE754</a></li>
+      <li>
+        <a href="/decimalToNormalizedBinary">Decimal to Normalized Binary</a>
+      </li>
+      <li><a href="/jacobiMethod">Jacobi Method</a></li>
+    </ul>
+    <form name="form" onsubmit="return handleSubmit()">
+      <label for="systemOfEquationsForm">
+        System of Equations<br />
+        <textarea
+          name="systemOfEquations"
+          id="systemOfEquationsForm"
+          cols="30"
+          rows="5"
+          placeholder="Coefficients separated by comma
+4, -1, -1, 3
+-2, 6, 1, 9
+-1, 1, 7, -6"
+        ></textarea
+        ><br />
+      </label>
+      <label for="systemOfEquationsForm">
+        First Assumptions<br />
+        <input
+          name="firstAssumptions"
+          id="firstAssumptions"
+          cols="30"
+          rows="5"
+          placeholder="0,0,0"
+        /><br />
+      </label>
+      <input type="submit" />
+    </form>
+
+    <div id="answer">
+      <p id="solutions"></p>
+      <table id="table"></table>
+    </div>
+  </body>
+</html>

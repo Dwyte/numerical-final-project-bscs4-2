@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="/decimalToIEEE754">Decimal to IEEE754</a></li>
+      <li>
+        <a href="/decimalToNormalizedBinary">Decimal to Normalized Binary</a>
+      </li>
+      <li><a href="/jacobiMethod">Jacobi Method</a></li>
+    </ul>
+    <form name="form" onsubmit="return handleSubmit()">
+      <input
+        required
+        type="number"
+        name="decimalToConvert"
+        placeholder="Decimal to convert..."
+      />
+      <input type="submit" />
+    </form>
+
+    <p id="answer"></p>
+  </body>
+</html>

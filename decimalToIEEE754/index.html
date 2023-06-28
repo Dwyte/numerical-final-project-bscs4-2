@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="/decimalToIEEE754">Decimal to IEEE754</a></li>
+      <li>
+        <a href="/decimalToNormalizedBinary">Decimal to Normalized Binary</a>
+      </li>
+      <li><a href="/jacobiMethod">Jacobi Method</a></li>
+    </ul>
+    <form name="form" onsubmit="return handleSubmit()">
+      <input
+        required
+        type="number"
+        name="decimalToConvert"
+        placeholder="Decimal to convert..."
+      />
+      <label for="32-bit-radio">
+        <input
+          id="32-bit-radio"
+          type="radio"
+          name="bitSize"
+          value="32"
+          checked
+        />
+        32-bit
+      </label>
+      <label for="64-bit-radio">
+        <input id="64-bit-radio" type="radio" name="bitSize" value="64" />
+        64-bit
+      </label>
+      <input type="submit" />
+    </form>
+
+    <b id="answer"></b>
+  </body>
+</html>
