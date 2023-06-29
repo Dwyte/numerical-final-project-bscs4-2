@@ -1,13 +1,19 @@
 function handleSubmit() {
   try {
     let equationInput = document.forms["form"]["equation"].value;
+    let methodInput = document.forms["form"]["method"].value;
     let precisionInput = parseFloat(document.forms["form"]["precision"].value);
     let xLeftInitial = parseFloat(document.forms["form"]["xLeftInitial"].value);
     let xRightInitial = parseFloat(
       document.forms["form"]["xRightInitial"].value
     );
 
-    const { root, iterations } = bisectionMethod(
+    const methods = {
+      bisection: bisectionMethod,
+      falsi: falsiMethod,
+    };
+
+    const { root, iterations } = methods[methodInput](
       equationInput,
       precisionInput,
       xLeftInitial,
@@ -46,6 +52,36 @@ function bisectionMethod(equation, precision, a, b) {
 
     const fA = f.evaluate({ x: a });
     const fB = f.evaluate({ x: b });
+    const fC = f.evaluate({ x: c });
+
+    if (fC === 0) {
+      return { root: c, iterations };
+    } else if (fA * fC < 0) {
+      b = c; // Update the interval to [a, c]
+    } else {
+      a = c; // Update the interval to [c, b]
+    }
+
+    let iteration = [a, b, fA, fB, c, fC];
+    iterations.push(iteration);
+  }
+
+  // Return the approximate root within the desired precision
+  return { root: (a + b) / 2, iterations };
+}
+
+function falsiMethod(equation, precision, a, b) {
+  // Define the function based on the equation string
+  const f = math.parse(equation).compile();
+
+  let iterations = [];
+
+  // Iterate until the desired precision is achieved
+  while (Math.abs(b - a) > precision) {
+    const fA = f.evaluate({ x: a });
+    const fB = f.evaluate({ x: b });
+
+    const c = (a * fB - b * fA) / (fB - fA); // Compute the false position
     const fC = f.evaluate({ x: c });
 
     if (fC === 0) {
