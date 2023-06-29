@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../math.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="/decimalToIEEE754">Decimal to IEEE754</a></li>
+      <li>
+        <a href="/decimalToNormalizedBinary">Decimal to Normalized Binary</a>
+      </li>
+      <li><a href="/bracketingMethod">Bracketing Method</a></li>
+      <li><a href="/openMethod">Open Method</a></li>
+      <li><a href="/jacobiMethod">Jacobi Method</a></li>
+    </ul>
+    <form name="form" onsubmit="return handleSubmit()">
+      <select name="method" id="method-select">
+        <option value="secant">Secant Method</option>
+        <option value="newton">Newton Raphson Method</option>
+      </select> <br>
+      <label for="equation">
+        f(x) =
+        <input required
+          name="equation"
+          id="equation"
+          placeholder="2x^1 + x + 7"
+        ></input
+        ><br />
+      </label>
+      <label for="precision">
+        Precision:
+        <input required
+          name="precision"
+          id="precision"
+          placeholder="0.001"
+        ></input
+        ><br />
+      </label>
+      <label for="xLeftInitial">
+         X<sub>a</sub> Assumption:
+        <input required
+          name="xLeftInitial"
+          id="xLeftInitial"
+          placeholder="-100"
+        ></input
+        ><br />
+      </label>
+      <label for="xRightInitial">
+        X<sub>b</sub> Assumption:
+       <input required
+         name="xRightInitial"
+         id="xRightInitial"
+         placeholder="100"
+       ></input
+       ><br />
+     </label>
+
+      <input  type="submit" />
+    </form>
+
+    <div id="answer">
+      <p id="solutions"></p>
+      <table id="table"></table>
+    </div>
+  </body>
+</html>
