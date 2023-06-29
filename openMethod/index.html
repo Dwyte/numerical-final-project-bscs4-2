@@ -18,8 +18,8 @@
       <li><a href="/openMethod">Open Method</a></li>
       <li><a href="/jacobiMethod">Jacobi Method</a></li>
     </ul>
-    <form name="form" onsubmit="return handleSubmit()">
-      <select name="method" id="method-select">
+    <form name="form" onsubmit="return handleSubmit()" novalidate>
+      <select name="method" id="method-select" onchange="handleSelectChange()">
         <option value="secant">Secant Method</option>
         <option value="newton">Newton Raphson Method</option>
       </select> <br>
@@ -41,25 +41,35 @@
         ></input
         ><br />
       </label>
-      <label for="xLeftInitial">
-         X<sub>a</sub> Assumption:
+
+      <label id="xLeftInitialInputLabel" for="xLeftInitial">
+        X<sub>a</sub> Assumption:
         <input required
-          name="xLeftInitial"
-          id="xLeftInitial"
-          placeholder="-100"
+        name="xLeftInitial"
+        id="xLeftInitial"
+        placeholder="-100"
         ></input
         ><br />
       </label>
-      <label for="xRightInitial">
+      <label id="xRightInitialInputLabel" for="xRightInitial">
         X<sub>b</sub> Assumption:
-       <input required
-         name="xRightInitial"
-         id="xRightInitial"
-         placeholder="100"
-       ></input
-       ><br />
-     </label>
-
+        <input required
+        name="xRightInitial"
+        id="xRightInitial"
+        placeholder="100"
+        ></input
+        ><br />
+      </label>
+      <label id="initialGuessInputLabel" for="initialGuess" style="display: none;">
+        Initial Guess:
+        <input required
+        name="initialGuess"
+        id="initialGuess"
+        placeholder="100"
+        ></input
+        ><br />
+      </label>
+      
       <input  type="submit" />
     </form>
 
