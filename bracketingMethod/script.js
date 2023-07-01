@@ -30,7 +30,7 @@ function handleSubmit() {
     displayIterationsTable(
       ["i", "XL", "XR", "f(XL)", "f(XR)", "XM", "f(XM)"],
       iterations.map((iteration) =>
-        iteration.map((num) => num.toFixed(decimalPlaces))
+        iteration.map((num) => num.toFixed(decimalPlaces + 1))
       )
     );
   } catch (error) {
@@ -40,19 +40,20 @@ function handleSubmit() {
   return false;
 }
 
-function bisectionMethod(equation, precision, a, b) {
+function bisectionMethod(equation, precision, a, b, maxIterations = 1000) {
   // Define the function based on the equation string
   const f = math.parse(equation).compile();
 
   let iterations = [];
+  let fC = Infinity;
 
   // Iterate until the desired precision is achieved
-  while (b - a > precision) {
+  for (let i = 0; i < maxIterations && Math.abs(fC) >= precision * 10; i++) {
     const c = (a + b) / 2; // Compute the midpoint
 
     const fA = f.evaluate({ x: a });
     const fB = f.evaluate({ x: b });
-    const fC = f.evaluate({ x: c });
+    fC = f.evaluate({ x: c });
 
     if (fC === 0) {
       return { root: c, iterations };
@@ -70,19 +71,20 @@ function bisectionMethod(equation, precision, a, b) {
   return { root: (a + b) / 2, iterations };
 }
 
-function falsiMethod(equation, precision, a, b) {
+function falsiMethod(equation, precision, a, b, maxIterations = 1000) {
   // Define the function based on the equation string
   const f = math.parse(equation).compile();
 
   let iterations = [];
+  let fC = Infinity;
 
   // Iterate until the desired precision is achieved
-  while (Math.abs(b - a) > precision) {
+  for (let i = 0; i < maxIterations && Math.abs(fC) >= precision * 10; i++) {
     const fA = f.evaluate({ x: a });
     const fB = f.evaluate({ x: b });
 
     const c = (a * fB - b * fA) / (fB - fA); // Compute the false position
-    const fC = f.evaluate({ x: c });
+    fC = f.evaluate({ x: c });
 
     if (fC === 0) {
       return { root: c, iterations };
