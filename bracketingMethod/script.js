@@ -64,6 +64,9 @@ function bisectionMethod(equation, precision, a, b, maxIterations = 1000) {
     fC = f.evaluate({ x: c });
     console.log(fC);
 
+    let iteration = [a, b, fA, fB, c, fC];
+    iterations.push(iteration);
+
     if (fC === 0) {
       return { root: c, iterations };
     } else if (fA * fC < 0) {
@@ -71,9 +74,6 @@ function bisectionMethod(equation, precision, a, b, maxIterations = 1000) {
     } else {
       a = c; // Update the interval to [c, b]
     }
-
-    let iteration = [a, b, fA, fB, c, fC];
-    iterations.push(iteration);
   }
 
   // Return the approximate root within the desired precision
@@ -95,6 +95,9 @@ function falsiMethod(equation, precision, a, b, maxIterations = 1000) {
 
     c = (a * fB - b * fA) / (fB - fA); // Compute the false position
     fC = f.evaluate({ x: c });
+    console.log([a, b, fA, fB, c, fC]);
+    let iteration = [a, b, fA, fB, c, fC];
+    iterations.push(iteration);
 
     if (fC === 0) {
       return { root: c, iterations };
@@ -103,9 +106,6 @@ function falsiMethod(equation, precision, a, b, maxIterations = 1000) {
     } else {
       a = c; // Update the interval to [c, b]
     }
-
-    let iteration = [a, b, fA, fB, c, fC];
-    iterations.push(iteration);
   }
 
   // Return the approximate root within the desired precision
