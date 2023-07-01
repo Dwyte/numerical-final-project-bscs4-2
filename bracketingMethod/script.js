@@ -28,7 +28,15 @@ function handleSubmit() {
 
     console.log(iterations);
     displayIterationsTable(
-      ["i", "XL", "XR", "f(XL)", "f(XR)", "XM", "f(XM)"],
+      [
+        "i",
+        "X<sub>L</sub>",
+        "X<sub>R</sub>",
+        "Y<sub>L</sub>",
+        "Y<sub>R</sub>",
+        "X<sub>M</sub>",
+        "Y<sub>M</sub>",
+      ],
       iterations.map((iteration) =>
         iteration.map((num) => num.toFixed(decimalPlaces + 1))
       )
@@ -54,6 +62,7 @@ function bisectionMethod(equation, precision, a, b, maxIterations = 1000) {
     const fA = f.evaluate({ x: a });
     const fB = f.evaluate({ x: b });
     fC = f.evaluate({ x: c });
+    console.log(fC);
 
     if (fC === 0) {
       return { root: c, iterations };
@@ -77,13 +86,14 @@ function falsiMethod(equation, precision, a, b, maxIterations = 1000) {
 
   let iterations = [];
   let fC = Infinity;
+  let c;
 
   // Iterate until the desired precision is achieved
   for (let i = 0; i < maxIterations && Math.abs(fC) >= precision * 10; i++) {
     const fA = f.evaluate({ x: a });
     const fB = f.evaluate({ x: b });
 
-    const c = (a * fB - b * fA) / (fB - fA); // Compute the false position
+    c = (a * fB - b * fA) / (fB - fA); // Compute the false position
     fC = f.evaluate({ x: c });
 
     if (fC === 0) {
@@ -99,7 +109,10 @@ function falsiMethod(equation, precision, a, b, maxIterations = 1000) {
   }
 
   // Return the approximate root within the desired precision
-  return { root: (a + b) / 2, iterations };
+  return {
+    root: c,
+    iterations,
+  };
 }
 
 function displayIterationsTable(header, body) {
