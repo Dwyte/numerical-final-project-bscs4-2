@@ -37,10 +37,10 @@ function handleSubmit() {
         "i",
         "X<sub>a</sub>",
         "X<sub>b</sub>",
-        "f(X<sub>a</sub>)",
-        "f(X<sub>b</sub>)",
         "X<sub>n</sub>",
-        "f(X<sub>n</sub>)",
+        "Y<sub>a</sub>",
+        "Y<sub>b</sub>",
+        "Y<sub>n</sub>",
       ];
     } else {
       let initialGuess = parseFloat(
@@ -51,11 +51,10 @@ function handleSubmit() {
 
       tableHeader = [
         "i",
-        "X",
-        "f(X)",
-        "f'(X)",
         "X<sub>n</sub>",
-        "f(X<sub>n</sub>)",
+        "X<sub>o</sub>",
+        "Y<sub>n</sub>",
+        "Y<sub>o</sub>",
       ];
     }
 
@@ -65,13 +64,13 @@ function handleSubmit() {
     console.log(decimalPlaces);
 
     document.getElementById("solutions").innerHTML = `x ≈ ${root.toFixed(
-      decimalPlaces
+      decimalPlaces + 1
     )}`;
 
     displayIterationsTable(
       tableHeader,
       iterations.map((iteration) =>
-        iteration.map((num) => num.toFixed(decimalPlaces))
+        iteration.map((num) => num.toFixed(decimalPlaces + 1))
       )
     );
   } catch (error) {
@@ -94,14 +93,15 @@ function secantMethod(equation, precision, x0, x1, maxIterations = 100) {
   for (let i = 0; i < maxIterations; i++) {
     const fX0 = f.evaluate({ x: x0 });
 
-    if (Math.abs(fX1 - fX0) < precision) {
-      return { root: x1, iterations };
-    }
-
     const x3 = x1 - (fX1 * (x1 - x0)) / (fX1 - fX0); // Compute the next approximation
+    const fX3 = f.evaluate({ x: x3 });
 
-    let iteration = [x0, x1, fX0, fX1, x3, f.evaluate({ x: x3 })];
+    let iteration = [x0, x1, x3, fX0, fX1, fX3];
     iterations.push(iteration);
+    console.log(fX3, precision);
+    if (Math.abs(fX3) < precision * 10) {
+      return { root: x3, iterations };
+    }
 
     x0 = x1;
     x1 = x3;
@@ -134,7 +134,7 @@ function newtonRaphsonMethod(
 
     const xNext = x - fX / fXDerivative; // Compute the next approximation
 
-    let iteration = [x, fX, fXDerivative, xNext, f.evaluate({ x: xNext })];
+    let iteration = [xNext, x, f.evaluate({ x: xNext }), fX];
     iterations.push(iteration);
 
     if (Math.abs(xNext - x) < precision) {

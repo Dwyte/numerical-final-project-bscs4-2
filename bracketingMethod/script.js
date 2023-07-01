@@ -21,11 +21,11 @@ function handleSubmit() {
     );
 
     const decimalPlaces = Math.log10(1 / precisionInput);
-    console.log(decimalPlaces);
 
     document.getElementById("solutions").innerHTML = `x ≈ ${root.toFixed(
-      decimalPlaces
+      decimalPlaces + 1
     )}`;
+
     console.log(iterations);
     displayIterationsTable(
       ["i", "XL", "XR", "f(XL)", "f(XR)", "XM", "f(XM)"],
